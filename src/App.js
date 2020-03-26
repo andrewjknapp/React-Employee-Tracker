@@ -1,33 +1,26 @@
 import React, { useReducer, useEffect } from 'react';
 import EmployeeContext from "./components/context/context";
-import { SET_EMPLOYEES, GET_EMPLOYEES } from './actions';
+import { SET_EMPLOYEES } from './actions';
 import Axios from 'axios';
-
-const reducer = ( state, action ) => {
-
-  if(action.type === SET_EMPLOYEES) {
-    return {
-      Employees: action.payload
-    }
-  }
-
-
-  return state;
-}
-
+import Header from './components/Header';
+import SearchBar from './components/SearchBar';
+import Employee from './components/Employee';
+import EmployeeHeading from './components/EmployeeHeading';
+import reducer from './components/reducer/reducer';
 
 function App() {
 
   const state = {
-    Employees: []
+    Employees: [],
+    FilteredEmployees: []
   }
 
   const [ store, dispatch ] = useReducer(reducer, state);
 
   useEffect(()=>{
     Axios.get("https://randomuser.me/api/?results=30&nat=us")
-    .then(({ data }) => {
-
+    .then((response) => {
+      const data = response.data.results
       dispatch({
         type: SET_EMPLOYEES,
         payload: data
@@ -35,11 +28,15 @@ function App() {
     })
   },[])
 
+  console.log(store);
+
   return (
     <React.Fragment>
-      <h1>Hello There</h1>
       <EmployeeContext.Provider value={{store, dispatch}}>
-
+        <Header/>
+        <SearchBar/>
+        <EmployeeHeading/>
+        {store.FilteredEmployees.map(employee => <Employee key={employee.id.value} Employee={employee}/>)}
       </EmployeeContext.Provider>
     </React.Fragment>
   );
