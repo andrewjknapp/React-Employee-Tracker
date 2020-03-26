@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import EmployeeContext from "./context/context";
 import { SEARCH_EMPLOYEES, RESET_SEARCH } from "../actions";
-import "./assets/css/SearchBar.css"
+import "./assets/css/SearchBar.css";
 
 function SearchBar() {
     const [ search, setSearch ] = useState('');
