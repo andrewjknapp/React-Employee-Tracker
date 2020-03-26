@@ -1,4 +1,4 @@
-import { SET_EMPLOYEES, SEARCH_EMPLOYEES, SORT_EMPLOYEES } from "../../actions";
+import { SET_EMPLOYEES, SEARCH_EMPLOYEES, SORT_EMPLOYEES, RESET_SEARCH } from "../../actions";
 
 const reducer = ( state, action ) => {
 
@@ -14,10 +14,17 @@ const reducer = ( state, action ) => {
       return {
         ...state,
         FilteredEmployees: state.Employees.filter(employee => {
-          let fullName = `${employee.name.title} ${employee.name.first} ${employee.name.last}`
-          return fullName.includes(action.payload);
+          let fullName = `${employee.name.first} ${employee.name.last}`.toLowerCase();
+          return fullName.includes(action.payload.toLowerCase());
         })
       }
+    }
+
+    if(action.type === RESET_SEARCH) {
+        return {
+            ...state,
+            FilteredEmployees: state.Employees
+        }
     }
   
     if(action.type === SORT_EMPLOYEES) {

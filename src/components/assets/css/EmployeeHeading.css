@@ -1,0 +1,18 @@
+.empHeader {
+    background-color: rgb(148, 77, 77);
+    border-style: solid;
+    border-top-width: 1px;
+    color: white;
+    border-color: black;
+
+}
+
+.empHeader li:hover {
+    color: rgb(201, 201, 201);
+    cursor: pointer;
+}
+
+#image-header:hover {
+    color: white;
+    cursor: default;
+}

@@ -1,0 +1,9 @@
+article {
+    width: fit-content;
+    margin: 5px auto;
+}
+
+.resetSearch {
+    display: block;
+    margin: 5px auto;
+}
